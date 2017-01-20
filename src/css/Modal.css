@@ -1,0 +1,45 @@
+.ModalOverLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.ModalOverLayer::after {
+  display: inline-block;
+  height: 100%;
+  content: '';
+  vertical-align: middle;
+}
+
+.ModalOverLayer.is-active {
+  z-index: 2;
+  opacity: 1;
+}
+
+.ModalCloseIcon {
+  text-align: right;
+  cursor: pointer;
+}
+
+.ModalContent {
+  display: inline-block;
+  padding: 2rem;
+  background-color: #fff;
+  vertical-align: middle;
+  text-align: left;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
