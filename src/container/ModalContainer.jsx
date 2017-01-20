@@ -1,33 +1,26 @@
-import React, { Component, PropTypes } from 'react';
-import Modal from '../components/Modal';
 import '../css/Modal.css';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import Modal from '../components/Modal';
+import { actionChangeModal, actionCloseModal } from '../actions';
 
 
 class ModalContainer extends Component {
  constructor() {
     super();
-    this.state = {
-      activeModalName: ''
-    };
   }
 
   handleOpenModal(e) {
-    let modalName = e.target.getAttribute('data-ref-modal');
-
-    this.setState({
-      activeModalName: modalName
-    });
+    this.props.handlerChangeModal(e);
   }
 
   handleCloseModal() {
-    this.setState({
-      activeModalName: ''
-    });
+    this.props.handlerCloseModal();
   }
 
   render() {
     const modalProps = {
-      activeModalName: this.state.activeModalName,
+      activeModalName: this.props.activeModalName,
       handler: this.handleCloseModal.bind(this)
     };
 
@@ -68,5 +61,35 @@ class ModalContainer extends Component {
   }
 }
 
+ModalContainer.propTypes = {
+  handlerChangeModal: PropTypes.func.isRequired,
+  handlerCloseModal: PropTypes.func.isRequired,
+  activeModalName: PropTypes.string.isRequired
+};
 
-export default ModalContainer;
+
+function mapStateToProps(state) {
+  return {
+    activeModalName: state.reducerChangeModal.activeModalName
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handlerChangeModal(e) {
+      let modalName = e.target.getAttribute('data-ref-modal');
+
+      dispatch(actionChangeModal(modalName));
+    },
+
+    handlerCloseModal() {
+      dispatch(actionCloseModal());
+    }
+  };
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ModalContainer);
