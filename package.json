@@ -2,7 +2,8 @@
   "name": "my-react-modal",
   "scripts": {
     "server": "webpack-dev-server",
-    "build": "webpack --watch --progress"
+    "build": "webpack --progress",
+    "test": "mocha test/**/*.spec.js --compilers js:babel-register"
   },
   "dependencies": {
     "react": "^15.4.2",
@@ -15,8 +16,13 @@
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
+    "babel-register": "^6.22.0",
     "classnames": "^2.2.5",
     "css-loader": "^0.26.1",
+    "enzyme": "^2.7.1",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2",
+    "react-addons-test-utils": "^15.4.2",
     "react-hot-loader": "^1.3.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
